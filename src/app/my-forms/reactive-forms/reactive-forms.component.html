@@ -1,0 +1,66 @@
+<div class="card">
+    <div class="card-body">
+      <div class="row">
+        <form [formGroup]="userModel" class="row col-12 g-3">
+          <div class="col-md-6">
+            <label for="inputEmail" class="form-label">Mail</label>
+            <input
+              formControlName="email"
+              type="email"
+              class="form-control"
+              id="inputEmail"
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="inputPassword" class="form-label">Contraseña</label>
+            <input [formControl]="passwordControl" type="password" class="form-control" id="inputPassword" />
+          </div>
+          <div class="col-md-6">
+            <label for="inputCity" class="form-label">Ciudad</label>
+            <input
+              formControlName="city"
+              type="text"
+              class="form-control"
+              [class.is-invalid]="cityControl.touched && cityControl.invalid"
+              id="inputCity"
+            />
+            <div class="invalid-feedback">
+              El campo es requerido
+            </div>
+          </div>
+          <div class="col-md-2">
+            <label for="inputZip" class="form-label">Codigo Postal</label>
+            <input type="text" class="form-control" id="inputZip" />
+          </div>
+          <div class="col-12">
+            <div class="mb-3">
+              <label for="inputAddress" class="form-label">Direcciones</label>
+              <div
+                *ngFor="let addressFormGroup of addresesFormArray.controls; let i = index"
+                class="input-group mb-3"
+              >
+                <ng-container [formGroup]="addressFormGroup">
+                  <input
+                    formControlName="address"
+                    type="text"
+                    class="form-control"
+                    id="inputAddress"
+                    placeholder="Obispo Clara 333"
+                  />
+                <button *ngIf="i > 0" (click)="deleteFormGroupFromAddressesFormArray(i)" class="btn btn-danger" type="button" id="button-addon2">X</button>
+                </ng-container>
+              </div>
+            </div>
+            <div class="d-grid gap-2">
+              <button (click)="addAddressControl()" class="btn btn-primary" type="button">
+                Agregar dirección
+              </button>
+            </div>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">Logear</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
